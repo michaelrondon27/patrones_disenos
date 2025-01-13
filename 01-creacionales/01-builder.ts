@@ -12,3 +12,59 @@
  *
  * https://refactoring.guru/es/design-patterns/builder
  */
+
+class Computer {
+
+    public cpu    : string = "cpu - not define";
+    public gpu?   : string;
+    public ram    : string = "ram - not define";
+    public storage: string = "storage - not define";
+
+    displayConfiguration(): void {
+        console.log(`Configuración de la computadora
+            CPU: ${ this.cpu }
+            RAM: ${ this.cpu }
+            Almacenamiento: ${ this.storage }
+            GPU: ${ this.gpu }
+        `);
+    }
+
+}
+
+class ComputerBuilder {
+
+    private computer: Computer;
+    
+    constructor() {
+        this.computer = new Computer();
+    }
+
+    build(): Computer {
+        return this.computer;
+    }
+
+    setCpu(cpu: string): ComputerBuilder {
+        this.computer.cpu = cpu;
+
+        return this;
+    }
+
+    setGpu(gpu: string): ComputerBuilder {
+        this.computer.gpu = gpu;
+
+        return this;
+    }
+
+    setRam(ram: string): ComputerBuilder {
+        this.computer.ram = ram;
+
+        return this;
+    }
+
+    setStorage(storage: string): ComputerBuilder {
+        this.computer.storage = storage;
+
+        return this;
+    }
+
+}
