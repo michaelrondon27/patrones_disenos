@@ -21,10 +21,10 @@ interface Hamburger {
 
 }
 
-class ChickenHamburger implements Hamburger {
+class BeanHamburger implements Hamburger {
     
     prepare(): void {
-        console.log("Preparando una hamburguesa de %cpollo", COLORS.yellow);
+        console.log("Preparando una hamburguesa de %cbean", COLORS.orange);
     }
 
 }
@@ -32,7 +32,15 @@ class ChickenHamburger implements Hamburger {
 class BeefHamburger implements Hamburger {
     
     prepare(): void {
-        console.log("Preparando una hamburguesa de %res", COLORS.brown);
+        console.log("Preparando una hamburguesa de %cres", COLORS.brown);
+    }
+
+}
+
+class ChickenHamburger implements Hamburger {
+    
+    prepare(): void {
+        console.log("Preparando una hamburguesa de %cpollo", COLORS.yellow);
     }
 
 }
@@ -49,10 +57,10 @@ abstract class Restaurant {
 
 }
 
-class ChickenRestaurant extends Restaurant {
+class BeanRestaurant extends Restaurant {
 
     override createHamburger(): Hamburger {
-        return new ChickenHamburger();
+        return new BeanHamburger();
     }
 
 }
@@ -64,3 +72,38 @@ class BeefRestaurant extends Restaurant {
     }
 
 }
+
+class ChickenRestaurant extends Restaurant {
+
+    override createHamburger(): Hamburger {
+        return new ChickenHamburger();
+    }
+
+}
+
+function main() {
+    let restaurant: Restaurant;
+
+    const burgerType: string | null = prompt("¿Qué tipo de hamburguesa quieres? ( chicken/beef/bean )");
+
+    switch (burgerType) {
+        case "bean":
+            restaurant = new BeanRestaurant();
+            break;
+
+        case "beef":
+            restaurant = new BeefRestaurant();
+            break;
+
+        case "chicken":
+            restaurant = new ChickenRestaurant();
+            break;
+
+        default:
+            throw new Error("Opción no válida");
+    }
+
+    restaurant.orderHamburger();
+}
+
+main();
