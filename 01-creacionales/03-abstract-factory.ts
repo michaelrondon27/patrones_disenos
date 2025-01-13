@@ -43,7 +43,7 @@ interface RestaurantFactory {
 class BeefHamburger implements Hamburger {
 
     prepare(): void {
-        console.log("Preparando hamburguesa de %Res", COLORS.red);
+        console.log("Preparando hamburguesa de %cRes", COLORS.red);
     }
 
 }
@@ -95,3 +95,19 @@ class HealthyRestaurantFactory implements RestaurantFactory {
     }
 
 }
+
+function main(factory: RestaurantFactory) {
+    const drink: Drink = factory.createDrink();
+    const hamburger: Hamburger = factory.createHamburger();
+
+    hamburger.prepare();
+    drink.pour();
+}
+
+console.log("\n%cPedido del menú regular:", COLORS.green);
+
+main(new FastFoodRestaurantFactory());
+
+console.log("\n%cPedido del menú saludable:", COLORS.green);
+
+main(new HealthyRestaurantFactory());
