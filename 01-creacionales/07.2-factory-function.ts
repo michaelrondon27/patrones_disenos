@@ -29,12 +29,27 @@ function formatDate(date: Date): string {
 }
 
 // Función fábrica que crea un manejador de logs
-type LogLevel = 'info' | 'warn' | 'error';
+type LogLevel = 'error' | 'info' | 'warn';
 
 function createLogger(level: LogLevel) {
     // Retorna una función que recibe el "message" como argumento
     // Completar: implementar el logger con formato y color para cada nivel
-    throw new Error('Not implemented');
+    
+    return (message: string) => {
+        const timestamp: string = formatDate(new Date());
+        const logColors = {
+            error: COLORS.red,
+            info: COLORS.white,
+            warn: COLORS.yellow
+        };
+        const prefix = {
+            error: "ERROR",
+            info: "INFO",
+            warn: "WARNING"
+        };
+
+        console.log(`%c[${ prefix[level] }: ${ timestamp }] ${ message }`, logColors[level]);
+    }
 }
 
 // Ejemplo de uso
