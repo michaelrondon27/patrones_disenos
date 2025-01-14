@@ -8,3 +8,19 @@
  * * es decir, en tiempo de ejecución y no en tiempo de compilación.
  *
  */
+
+import { COLORS } from "../helpers/colors.ts";
+
+type Language = 'en' | 'es' | 'fr';
+
+function createGreeter(lang: Language) {
+    return function (name: string) {
+        const messages = {
+            en: `Hello, %c${ name }!`,
+            es: `Hola, %c${ name }!`,
+            fr: `Bonjour, %c${ name }!`
+        };
+
+        return console.log(messages[lang], COLORS.red);
+    }
+}
