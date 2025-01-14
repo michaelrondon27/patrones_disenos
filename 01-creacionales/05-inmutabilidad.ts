@@ -65,4 +65,50 @@ class CodeEditorHistory {
         this.currentIndex++;
     }
 
+    undo(): CodeEditorState | null {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+            return this.history[this.currentIndex];
+        }
+
+        return null;
+    }
+
 }
+
+function main() {
+    const history: CodeEditorHistory = new CodeEditorHistory();
+
+    let editorState: CodeEditorState = new CodeEditorState("console.log('Hola Mundo');", 2, false);
+
+    history.save(editorState);
+
+    console.log("%cEstado inicial", COLORS.blue);
+    editorState.displayState();
+
+    editorState = editorState.copyWith({
+        content: "console.log('Hola Mundo') \nconsole.log('Nueva linea')",
+        cursorPosition: 3,
+        unsavedChanges: true
+    });
+    history.save(editorState);
+
+    console.log("\n%cDespués del primer cambio", COLORS.blue);
+    editorState.displayState();
+
+    editorState = editorState.copyWith({ cursorPosition: 5 });
+    history.save(editorState);
+
+    console.log("\n%cDespués de mover el cursor", COLORS.blue);
+    editorState.displayState();
+
+    console.log("\n%cDespués del undo", COLORS.blue);
+    editorState = history.undo()!;
+    editorState.displayState();
+
+    console.log("\n%cDespués del redo", COLORS.blue);
+    editorState = history.redo()!;
+    editorState.displayState();
+}
+
+main();
