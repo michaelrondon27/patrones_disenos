@@ -54,7 +54,27 @@ class DragonBalls {
             return;
         }
 
-        console.log(`Aún faltan ${ 7 - this.ballsCollected } esferas para invocar a Shenlong`)
+        console.log(`\nAún faltan ${ 7 - this.ballsCollected } esferas para invocar a Shenlong`)
     }
 
 }
+
+function main() {
+    const gokuDragonBalls: DragonBalls = DragonBalls.getInstance();
+    
+    gokuDragonBalls.collectBall();
+    gokuDragonBalls.collectBall();
+    gokuDragonBalls.collectBall();
+    gokuDragonBalls.summonShenlong();
+
+    const vegetaDragonBalls: DragonBalls = DragonBalls.getInstance();
+
+    vegetaDragonBalls.collectBall();
+    vegetaDragonBalls.collectBall();
+    vegetaDragonBalls.collectBall();
+    vegetaDragonBalls.collectBall();
+    gokuDragonBalls.summonShenlong();
+    vegetaDragonBalls.summonShenlong();
+}
+
+main();
